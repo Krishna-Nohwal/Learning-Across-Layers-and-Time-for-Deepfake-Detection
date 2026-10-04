@@ -86,12 +86,7 @@ For Stage 2, each tapped layer supplies a sequence of frame CLS features. A memo
 ## Citation
 
 ```bibtex
-@inproceedings{anonymous2026learning,
-  title     = {Learning Across Layers and Time for Deepfake Detection},
-  author    = {Anonymous},
-  booktitle = {ACCV 2026 Submission},
-  year      = {2026}
-}
+TODO
 ```
 
 
