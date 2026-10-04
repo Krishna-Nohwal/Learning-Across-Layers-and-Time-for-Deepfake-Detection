@@ -1,0 +1,14 @@
+torch
+torchvision
+timm
+transformers>=4.45,<5
+peft>=0.13,<0.20
+opencv-python-headless
+albumentations
+pillow
+numpy
+pandas
+scikit-learn
+pytorch-metric-learning
+tqdm
+safetensors
