@@ -20,6 +20,10 @@
 
 The method learns forensic cues at multiple DINOv3 depths and then models how those cues evolve across video frames.
 
+<p align="center">
+  <img src="assets/overview.png" alt="Overview of the two-stage deepfake detection pipeline" width="700">
+</p>
+
 - **Stage 1** adapts a pretrained DINOv3-Large backbone with LoRA. Four Layer Token Heads use CLS, register, and patch tokens from transformer blocks 20–23.
 - **Stage 2** freezes the frame model, retrieves real-video references from a k-nearest-neighbor memory bank, and processes four frame-feature sequences with temporal transformers. A pooled frame-logit residual is combined with the temporal representation for video classification.
 
@@ -27,6 +31,7 @@ The method learns forensic cues at multiple DINOv3 depths and then models how th
 
 ```text
 .
+├── assets/                # figures used in the README
 ├── augmentations.py       # image loading, normalization, and training augmentations
 ├── frame_model.py         # DINOv3-Large, LoRA, and Layer Token Heads
 ├── video_model.py         # temporal modules and real-video memory bank
@@ -88,6 +93,3 @@ For Stage 2, each tapped layer supplies a sequence of frame CLS features. A memo
 ```bibtex
 TODO
 ```
-
-
-#
