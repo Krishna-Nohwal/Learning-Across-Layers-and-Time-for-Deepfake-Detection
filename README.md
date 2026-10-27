@@ -21,7 +21,7 @@
 The method learns forensic cues at multiple DINOv3 depths and then models how those cues evolve across video frames.
 
 <p align="center">
-  <img src="assets/overview.png" alt="Overview of the two-stage deepfake detection pipeline" width="700">
+  <img src="assets/arch7.png" alt="Overview of the two-stage deepfake detection pipeline" width="700">
 </p>
 
 - **Stage 1** adapts a pretrained DINOv3-Large backbone with LoRA. Four Layer Token Heads use CLS, register, and patch tokens from transformer blocks 20–23.
