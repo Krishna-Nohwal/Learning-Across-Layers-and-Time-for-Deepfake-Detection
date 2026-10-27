@@ -1,28 +1,3 @@
-"""
-augmentations.py — Optimised augmentation library for DINO-MAC.
-
-Optimisation log (on top of previous version):
-  1. augment_batch: albu CPU↔GPU round-trip is the single biggest bottleneck
-     on a small GPU like the 4050. We now overlap it with a CUDA stream so the
-     GPU can run other work while albu runs on CPU threads.
-  2. augment_batch: de-norm / re-norm fused into one in-place op each →
-     two fewer full-batch allocations per step.
-  3. batch_frequency_noise: both noise tensors generated in one randn call and
-     split → one allocation instead of two; fused complex multiply avoids a
-     temp tensor.
-  4. batch_blend_boundary: replaced Python ** with torch.pow; ring mask is
-     built with addcmul_ to avoid temporaries.
-  5. load_and_resize: IMREAD_UNCHANGED + manual channel check removes a
-     redundant memcopy on images that are already RGB-ish; cvtColor only called
-     when needed.
-  6. ThreadPoolExecutor bumped to 8 workers to saturate Ryzen 7000 cores
-     (the pool is I/O+C++ bound so more threads > more throughput here).
-  7. _MEAN_BATCH / _STD_BATCH pinned to non-pageable host memory so
-     .to(device) copies via DMA without stalling the CPU.
-  8. AMP (autocast) friendliness: batch_frequency_noise explicitly keeps its
-     FFT math in float32 even under fp16 autocast, then casts back.
-"""
-
 import random
 import inspect
 import numpy as np

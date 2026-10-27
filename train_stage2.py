@@ -44,8 +44,8 @@ parser.add_argument("--num_workers",      default=20,   type=int)
 parser.add_argument("--save_root",        default="checkpoints_s2", type=str)
 parser.add_argument("--load_from",        default="",   type=str,
                     help="Path to Stage 1 best.pth (required).")
-parser.add_argument("--manifest",         default="E:/Work/sampled_30k/manifest_onct.csv", type=str)
-parser.add_argument("--root_dir",         default="E:/Work/sampled_30k/", type=str)
+parser.add_argument("--manifest",         default=None, type=str)
+parser.add_argument("--root_dir",         default=None, type=str)
 parser.add_argument("--val_ratio",        default=0.05, type=float,
                     help="Fraction of videos held out for validation.")
 parser.add_argument("--lr",               default=1e-3, type=float,

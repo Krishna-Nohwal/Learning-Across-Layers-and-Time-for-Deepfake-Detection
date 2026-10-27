@@ -26,11 +26,6 @@ from frame_model import ViT
 
 
 def check_layerscale(vit_backbone):
-    """
-    DINOv2/v3 ViT variants in timm normally ship with LayerScale (ls1/ls2)
-    built into every block already. We don't add it manually — we just
-    verify it's present so we're not silently missing it.
-    """
     try:
         block0 = vit_backbone.blocks[0]
         has_ls = hasattr(block0, 'ls1') and not isinstance(block0.ls1, nn.Identity)
@@ -48,12 +43,11 @@ def check_layerscale(vit_backbone):
 parser = argparse.ArgumentParser()
 parser.add_argument('--epochs',        default=50,   type=int)
 parser.add_argument('--batch_size',    default=128,    type=int)
-parser.add_argument('--num_workers',   default=36,    type=int,
-                    help='6 workers suits Ryzen 7000; tune down if RAM is tight')
+parser.add_argument('--num_workers',   default=36,    type=int)
 parser.add_argument('--save_root',     default='checkpoints_vit_4layers', type=str)
 parser.add_argument('--load_from',     default='',   type=str)
-parser.add_argument('--manifest',      default='E:/Work/sampled_30k/manifest_onct.csv', type=str)
-parser.add_argument('--root_dir',      default='E:/Work/sampled_30k/', type=str)
+parser.add_argument('--manifest',      default=None, type=str)
+parser.add_argument('--root_dir',      default=None, type=str)
 parser.add_argument('--val_ratio',     default=0.05, type=float)
 parser.add_argument('--supcon_weight', default=1/16, type=float)
 parser.add_argument('--ms_weight',     default=1/16, type=float,
@@ -245,8 +239,6 @@ if __name__ == "__main__":
     # ── Model ───────────────────────────────────────────────────────────────
     model = ViT().to(device)
 
-    # Verify LayerScale is present in the DINOv3 backbone (should be native;
-    # we don't add it manually, just confirm it's there).
     check_layerscale(model.vit.base_model.model)
 
     if args.load_from:
