@@ -1,4 +1,5 @@
 # Learning Across Layers and Time for Deepfake Detection
+(Accepted at the 18th Asian Conference on Computer Vision (ACCV) 2026)
 
 **Learning Across Layers and Time for Deepfake Detection** proposes a two-stage video deepfake detector built on DINOv3-Large.
 
